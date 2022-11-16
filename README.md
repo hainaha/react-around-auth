@@ -1,8 +1,28 @@
-Around the U.S. project on React, featuring authorization and registration.
+# React Project: Around The U.S.
 
-This repository will contain your own front-end project on React with added authorization and registration features.
-Start working with your previously built front end code from Sprint 11.
+### Visão Geral
 
-All authorization, registration and token requests must go through to the server running on [https://register.nomoreparties.co](https://register.nomoreparties.co/).
+- Introdução
+- Tecnologias utilizadas
+- Figma
+- GitHub Pages
 
-Good luck!
+**Introdução**
+
+Este projeto implementa o seguinte projeto com uso do React: - [Link para o projeto anterior publicado no GitHub Pages](https://hainaha.github.io/web_project_4/).
+Ele mostra cards de locais pelos Estados Unidos visitados pelo Explorador Jacques Cousteau e cards acrecsentados pelos colegas de curso. O projeto foi construído durante o curso de Desenvolvedor Web da Practicum como atividade prática para lidar com comandos de React para construção do DOM, validação de formulários, implementação de componentes React, construção de projetos com Create React App e uso de dados de api.
+
+**Tecnologias utilizadas**
+
+Para construção deste projeto foram usados React, Create React App, CSS semântico, metodologia BEM para nomenclatura e estrutura de arquivos, Javascript e api.
+
+**Links para o projeto no Figma**
+
+- [Sprint 4](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+- [Sprint 5](<https://www.figma.com/file/HD3sjY52cfmedXVdlxkhZ0/WEB%2C-Sprint-5-(10.1)%3A-EUA-Afora-%7C-desktop-%2B-mobile?node-id=0%3A1>)
+- [Sprint 6](https://www.figma.com/file/Pk5nFBSV295thBCWU6jwW5/WEB.Sprint-6%3A-Around-The-U.S.-pt?node-id=0%3A1)
+- [Sprint 9](https://www.figma.com/file/lEGbFrRr3ft9xIfxp1RFSz/WEB-Sprint-9%3A-JavaScript-Aplic%C3%A1vel?node-id=0%3A1)
+
+**GitHub Pages**
+
+- [Link para o projeto publicado no GitHub Pages](https://hainaha.github.io/react-around-auth/)
