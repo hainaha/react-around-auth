@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import api from '../utils/api';
 import Header from './Header';
 import Main from './Main';
@@ -11,9 +11,6 @@ import Footer from './Footer';
 import ImagePopup from './ImagePopup';
 import { CreateUserContext } from '../contexts/CurrentUserContext';
 import Login from './Login';
-import Register from './Register';
-import ProtectedRoute from './ProtectedRoute';
-import EmailContainer from './EmailContainer';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -24,7 +21,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     api.getUserData().then((data) => {
@@ -154,41 +151,17 @@ function App() {
 
   return (
     <Switch>
-      <Route path='/signup'>
-        <div className='page'>
-          <Header>
-            <Link to='signin' className='header__link'>
-              Faça o login
-            </Link>
-          </Header>
-          <Register />
-          <Footer />
-        </div>
+      <Route path='/login' component={Login}>
+        <Login />
       </Route>
-      <Route path='/signin'>
-        <div className='page'>
-          <Header>
-            <Link to='signin' className='header__link'>
-              Entrar
-            </Link>
-          </Header>
-          <Login />
-          <Footer />
-        </div>
+      <Route path='/footer'>
+        <Footer />
       </Route>
-      <ProtectedRoute isLoggedIn={isLoggedIn} path='/'>
-        <>
-          <CreateUserContext.Provider value={currentUser}>
+      {/* <Route path='/'>
+          <>
+            <CreateUserContext.Provider value={currentUser}>
             <div className='page'>
-              <EmailContainer />
-              <Header>
-                <div className='header__email-container'>
-                  <p className='header__link'>email@email.com</p>
-                  <Link to='XXXXXXXXXX' className='header__link'>
-                    Sair
-                  </Link>
-                </div>
-              </Header>
+              <Header />
               <Main
                 onEditProfileClick={handleEditProfileClick}
                 onAddPlaceClick={handleAddPlaceClick}
@@ -231,10 +204,10 @@ function App() {
                 onDeleteSubmit={handleCardDelete}
               />
               <Footer />
-            </div>
-          </CreateUserContext.Provider>
-        </>
-      </ProtectedRoute>
+              </div>
+            </CreateUserContext.Provider>
+          </>
+        </Route> */}
     </Switch>
   );
 }
