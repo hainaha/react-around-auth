@@ -1,6 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import * as auth from '../utils/auth';
 
-function Register() {
+function Register(props) {
+  const [values, setValues] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    auth.register(values).catch((err) => console.log(err));
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+  };
+
   return (
     <>
       <div
@@ -21,6 +38,8 @@ function Register() {
             <input
               type='email'
               name='email'
+              value={values.email}
+              onChange={handleChange}
               placeholder='E-mail'
               className='auth-form__input'
               id='register_email'
@@ -31,6 +50,8 @@ function Register() {
             <input
               type='password'
               name='password'
+              value={values.password}
+              onChange={handleChange}
               placeholder='Senha'
               className='auth-form__input'
               id='register_password'
@@ -38,11 +59,17 @@ function Register() {
               minLength='2'
               maxLength='30'
             />
-            <button className={'auth-form__button'} type='submit'>
+            <button
+              className={'auth-form__button'}
+              type='submit'
+              onClick={handleSubmit}
+            >
               Inscrever-se
             </button>
             <p className='auth-form__text'>
-              Já é um membro? Faça o login aqui!
+              <Link to='/signin' className='auth-form__text'>
+                Já é um membro? Faça o login aqui!
+              </Link>
             </p>
           </div>
         </form>

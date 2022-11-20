@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
+import * as auth from '../utils/auth';
 import api from '../utils/api';
 import Header from './Header';
 import Main from './Main';
@@ -14,6 +15,7 @@ import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
 import EmailContainer from './EmailContainer';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -25,6 +27,12 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isSubscribePopupOpen, setIsSubscribePopupOpen] = useState(false);
+  const [isSubscribeSuccessful, setIsSubscribeSuccessful] = useState(false);
+  // const [registerFormValues, setRegisterFormValues] = useState({
+  //   email: '',
+  //   password: '',
+  // });
 
   useEffect(() => {
     api.getUserData().then((data) => {
@@ -60,6 +68,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsDeleteCardPopupOpen(false);
     setIsImagePopupOpen(false);
+    setIsSubscribePopupOpen(false);
   }
 
   function handleUpdateUser({ name, about }) {
@@ -152,6 +161,11 @@ function App() {
     });
   }
 
+  function handleSubscribeClick(e) {
+    e.preventDefault();
+    setIsSubscribePopupOpen(true);
+  }
+
   return (
     <Switch>
       <Route path='/signup'>
@@ -161,8 +175,13 @@ function App() {
               Faça o login
             </Link>
           </Header>
-          <Register />
-          <Footer />
+          <Register
+            success={setIsSubscribeSuccessful}
+            // values={registerFormValues}
+            // setValues={setRegisterFormValues}
+            onSubscribeClick={handleSubscribeClick}
+          />
+          <InfoTooltip isOpen={isSubscribePopupOpen} onClose={closeAllPopups} />
         </div>
       </Route>
       <Route path='/signin'>
