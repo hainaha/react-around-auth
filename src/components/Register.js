@@ -10,7 +10,18 @@ function Register(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    auth.register(values).catch((err) => console.log(err));
+    auth
+      .register(values)
+      .then(() => {
+        props.setSuccess(true);
+        console.log(props.success);
+      })
+      .then(() => props.openPopup(true))
+      .catch((err) => {
+        console.log(err);
+        props.setSuccess(false);
+        props.openPopup(true);
+      });
   };
 
   const handleChange = (event) => {

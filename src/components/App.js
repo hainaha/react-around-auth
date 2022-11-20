@@ -176,12 +176,18 @@ function App() {
             </Link>
           </Header>
           <Register
-            success={setIsSubscribeSuccessful}
+            setSuccess={setIsSubscribeSuccessful}
+            success={isSubscribeSuccessful}
+            openPopup={setIsSubscribePopupOpen}
             // values={registerFormValues}
             // setValues={setRegisterFormValues}
             onSubscribeClick={handleSubscribeClick}
           />
-          <InfoTooltip isOpen={isSubscribePopupOpen} onClose={closeAllPopups} />
+          <InfoTooltip
+            success={isSubscribeSuccessful}
+            isOpen={isSubscribePopupOpen}
+            onClose={closeAllPopups}
+          />
         </div>
       </Route>
       <Route path='/signin'>
