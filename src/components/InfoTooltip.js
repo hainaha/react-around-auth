@@ -7,11 +7,11 @@ function InfoTooltip(props) {
       <div className={`popup ` + (props.isOpen ? 'popup_opened' : '')}>
         <div className='popup__container info-tooltip'>
           <img
-            src={props.sucess ? success_icon : error_icon}
+            src={props.success ? success_icon : error_icon}
             className='info-tooltip__icon'
           />
           <p className='popup__title info-tooltip__text'>
-            {props.sucess
+            {props.success
               ? 'Tudo certo! Você já pode fazer o login.'
               : 'Ops, algo deu errado! Por favor, tente novamente.'}
           </p>

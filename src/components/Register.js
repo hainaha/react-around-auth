@@ -14,7 +14,6 @@ function Register(props) {
       .register(values)
       .then(() => {
         props.setSuccess(true);
-        console.log(props.success);
       })
       .then(() => props.openPopup(true))
       .catch((err) => {
