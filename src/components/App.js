@@ -29,10 +29,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isSubscribePopupOpen, setIsSubscribePopupOpen] = useState(false);
   const [isSubscribeSuccessful, setIsSubscribeSuccessful] = useState(false);
-  // const [registerFormValues, setRegisterFormValues] = useState({
-  //   email: '',
-  //   password: '',
-  // });
+  const [registerFormValues, setRegisterFormValues] = useState({
+    email: '',
+    password: '',
+  });
 
   useEffect(() => {
     api.getUserData().then((data) => {
@@ -161,9 +161,24 @@ function App() {
     });
   }
 
+  function handleRegisterFormChange(event) {
+    const { name, value } = event.target;
+    setRegisterFormValues({ ...registerFormValues, [name]: value });
+  }
+
   function handleSubscribeClick(e) {
     e.preventDefault();
-    setIsSubscribePopupOpen(true);
+    auth
+      .register(registerFormValues)
+      .then(() => {
+        setIsSubscribeSuccessful(true);
+      })
+      .then(() => setIsSubscribePopupOpen(true))
+      .catch((err) => {
+        console.log(err);
+        setIsSubscribeSuccessful(false);
+        setIsSubscribePopupOpen(true);
+      });
   }
 
   return (
@@ -176,12 +191,9 @@ function App() {
             </Link>
           </Header>
           <Register
-            setSuccess={setIsSubscribeSuccessful}
-            success={isSubscribeSuccessful}
-            openPopup={setIsSubscribePopupOpen}
-            // values={registerFormValues}
-            // setValues={setRegisterFormValues}
-            onSubscribeClick={handleSubscribeClick}
+            handleChange={handleRegisterFormChange}
+            values={registerFormValues}
+            handleSubmit={handleSubscribeClick}
           />
           <InfoTooltip
             success={isSubscribeSuccessful}

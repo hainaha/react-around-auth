@@ -1,33 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as auth from '../utils/auth';
 
 function Register(props) {
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    auth
-      .register(values)
-      .then(() => {
-        props.setSuccess(true);
-      })
-      .then(() => props.openPopup(true))
-      .catch((err) => {
-        console.log(err);
-        props.setSuccess(false);
-        props.openPopup(true);
-      });
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValues({ ...values, [name]: value });
-  };
-
   return (
     <>
       <div
@@ -48,8 +21,8 @@ function Register(props) {
             <input
               type='email'
               name='email'
-              value={values.email}
-              onChange={handleChange}
+              value={props.values.email}
+              onChange={props.handleChange}
               placeholder='E-mail'
               className='auth-form__input'
               id='register_email'
@@ -60,8 +33,8 @@ function Register(props) {
             <input
               type='password'
               name='password'
-              value={values.password}
-              onChange={handleChange}
+              value={props.values.password}
+              onChange={props.handleChange}
               placeholder='Senha'
               className='auth-form__input'
               id='register_password'
@@ -72,7 +45,7 @@ function Register(props) {
             <button
               className={'auth-form__button'}
               type='submit'
-              onClick={handleSubmit}
+              onClick={props.handleSubmit}
             >
               Inscrever-se
             </button>
