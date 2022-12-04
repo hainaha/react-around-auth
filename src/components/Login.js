@@ -4,19 +4,8 @@ import { Link } from 'react-router-dom';
 function Login(props) {
   return (
     <>
-      <div
-      // className={
-      //   `popup popup_type_${props.name} ` +
-      //   (props.isOpen ? 'popup_opened' : '')
-      // }
-      >
-        <form
-        // className='popup__form'
-        // id={props.name}
-        // name={props.name}
-        // noValidate
-        // onSubmit={props.onSubmit}
-        >
+      <div>
+        <form>
           <div className='auth-form__container'>
             <p className='auth-form__title'>Entrar</p>
             <input
