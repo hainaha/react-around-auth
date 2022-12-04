@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Login() {
+function Login(props) {
   return (
     <>
       <div
@@ -22,6 +22,8 @@ function Login() {
             <input
               type='email'
               name='email'
+              value={props.values.email}
+              onChange={props.handleChange}
               placeholder='E-mail'
               className='auth-form__input'
               id='register_email'
@@ -32,6 +34,8 @@ function Login() {
             <input
               type='password'
               name='password'
+              value={props.values.password}
+              onChange={props.handleChange}
               placeholder='Senha'
               className='auth-form__input'
               id='register_password'
@@ -39,7 +43,11 @@ function Login() {
               minLength='2'
               maxLength='30'
             />
-            <button className={'auth-form__button'} type='submit'>
+            <button
+              className={'auth-form__button'}
+              type='submit'
+              onClick={props.handleSubmit}
+            >
               Entrar
             </button>
             <p className='auth-form__text'>

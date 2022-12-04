@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, useHistory } from 'react-router-dom';
 import * as auth from '../utils/auth';
 import api from '../utils/api';
 import Header from './Header';
@@ -26,13 +26,18 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSubscribePopupOpen, setIsSubscribePopupOpen] = useState(false);
   const [isSubscribeSuccessful, setIsSubscribeSuccessful] = useState(false);
   const [registerFormValues, setRegisterFormValues] = useState({
     email: '',
     password: '',
   });
+  const [loginFormValues, setLoginFormValues] = useState({
+    email: '',
+    password: '',
+  });
+  const history = useHistory();
 
   useEffect(() => {
     api.getUserData().then((data) => {
@@ -170,14 +175,30 @@ function App() {
     e.preventDefault();
     auth
       .register(registerFormValues)
-      .then(() => {
+      .then((res) => {
         setIsSubscribeSuccessful(true);
       })
-      .then(() => setIsSubscribePopupOpen(true))
+      .then((res) => setIsSubscribePopupOpen(true))
       .catch((err) => {
         console.log(err);
         setIsSubscribeSuccessful(false);
         setIsSubscribePopupOpen(true);
+      });
+  }
+
+  function handleLoginFormChange(event) {
+    const { name, value } = event.target;
+    setLoginFormValues({ ...loginFormValues, [name]: value });
+  }
+
+  function handleLoginClick(e) {
+    e.preventDefault();
+    auth
+      .login(loginFormValues)
+      .then((res) => setIsLoggedIn(true))
+      .then((res) => history.push('/'))
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -209,7 +230,11 @@ function App() {
               Entrar
             </Link>
           </Header>
-          <Login />
+          <Login
+            handleChange={handleLoginFormChange}
+            values={loginFormValues}
+            handleSubmit={handleLoginClick}
+          />
           <Footer />
         </div>
       </Route>
