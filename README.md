@@ -25,6 +25,6 @@ Para construção deste projeto foram usados React, Create React App, CSS semân
 - [Sprint 9](https://www.figma.com/file/lEGbFrRr3ft9xIfxp1RFSz/WEB-Sprint-9%3A-JavaScript-Aplic%C3%A1vel?node-id=0%3A1)
 - [Sprint 14](https://www.figma.com/file/fPk1muyuDeiwfymacJfazP/WEB-Sprint-14%3A-Registro-e-autoriza%C3%A7%C3%A3o)
 
-**GitHub Pages**
+<!-- **GitHub Pages**
 
-- [Link para o projeto publicado no GitHub Pages](https://hainaha.github.io/react-around-auth/)
+- [Link para o projeto publicado no GitHub Pages](https://hainaha.github.io/react-around-auth/) -->
