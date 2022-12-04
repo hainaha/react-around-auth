@@ -38,6 +38,7 @@ function App() {
     password: '',
   });
   const history = useHistory();
+  const [userEmail, setUserEmail] = useState({ email: '' });
 
   useEffect(() => {
     api.getUserData().then((data) => {
@@ -202,6 +203,25 @@ function App() {
       });
   }
 
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      auth.verifyToken(token).then((res) => {
+        if (res) {
+          setUserEmail(res.data.email);
+          setIsLoggedIn(true);
+          history.push('/');
+        }
+      });
+    }
+  }, [history]);
+
+  function handleSignOutClick() {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    history.push('/signin');
+  }
+
   return (
     <Switch>
       <Route path='/signup'>
@@ -245,10 +265,10 @@ function App() {
               <EmailContainer />
               <Header>
                 <div className='header__email-container'>
-                  <p className='header__link'>email@email.com</p>
-                  <Link to='XXXXXXXXXX' className='header__link'>
+                  <p className='header__email'>{userEmail}</p>
+                  <button className='header__link' onClick={handleSignOutClick}>
                     Sair
-                  </Link>
+                  </button>
                 </div>
               </Header>
               <Main

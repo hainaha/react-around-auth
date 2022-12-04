@@ -28,6 +28,12 @@ export const login = ({ email, password }) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        return data;
+      }
+    })
+    .then((data) => {
       if (data.error) {
         throw new Error(data.error);
       }
@@ -41,5 +47,7 @@ export const verifyToken = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  });
+  })
+    .then((res) => res.json())
+    .then((data) => data);
 };
