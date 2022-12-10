@@ -38,7 +38,8 @@ function App() {
     password: '',
   });
   const history = useHistory();
-  const [userEmail, setUserEmail] = useState({ email: '' });
+  // const [userEmail, setUserEmail] = useState({ email: '' });
+  const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
     api.getUserData().then((data) => {

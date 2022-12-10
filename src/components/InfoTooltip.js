@@ -8,6 +8,7 @@ function InfoTooltip(props) {
         <div className='popup__container info-tooltip'>
           <img
             src={props.success ? success_icon : error_icon}
+            alt='Ícone que mostra um V em caso de sucesso ou um X em caso de erro no registro, ler o texto seguinte para melhor entendimento.'
             className='info-tooltip__icon'
           />
           <p className='popup__title info-tooltip__text'>
